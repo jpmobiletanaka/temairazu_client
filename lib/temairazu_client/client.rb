@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TemairazuClient
   class Client
     TEMAIRAZU_URL = 'https://api.temairazu.net/rmsup'
@@ -10,8 +12,9 @@ module TemairazuClient
     def call(params)
       raise TemairazuClient::Error, 'Wrong account' unless sc_account.enabled?
 
-      pms_xml = prepare_params(params, request_root)
-      response = HTTParty.post(TEMAIRAZU_URL, body: { PMS_XML: pms_xml }, timeout: TIMEOUT)
+      extended_params = safe_extend_params(params)
+      pms_xml = prepare_params(extended_params, request_root)
+      response = ::HTTParty.post(TEMAIRAZU_URL, body: { PMS_XML: pms_xml }, timeout: TIMEOUT)
       Ox.load(response.body.gsub(/&(?!amp;)/, '&amp;'), mode: :hash_no_attrs, effort: :auto_define)
     end
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TemairazuClient
   module PlanDetails
     class FetchClient < TemairazuClient::Client
@@ -16,7 +18,6 @@ module TemairazuClient
       end
 
       def extend_params(info)
-
         params = dates.map do |date|
           {
             PlanTypeCode: info[:plan].code,

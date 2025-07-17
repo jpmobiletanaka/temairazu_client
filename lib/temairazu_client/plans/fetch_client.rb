@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TemairazuClient
   module Plans
     class FetchClient < TemairazuClient::Client

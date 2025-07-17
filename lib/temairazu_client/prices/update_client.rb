@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TemairazuClient
   module Prices
     class UpdateClient < TemairazuClient::Client

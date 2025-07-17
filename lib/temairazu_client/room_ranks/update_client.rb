@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TemairazuClient
   module RoomRanks
     class UpdateClient < TemairazuClient::Client

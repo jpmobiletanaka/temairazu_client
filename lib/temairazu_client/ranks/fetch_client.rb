@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TemairazuClient
   module Ranks
     class FetchClient < TemairazuClient::Client
