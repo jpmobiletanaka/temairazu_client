@@ -15,8 +15,13 @@ module TemairazuClient
       extended_params = safe_extend_params(params)
       pms_xml = prepare_params(extended_params, request_root)
       response = ::HTTParty.post(TEMAIRAZU_URL, body: { PMS_XML: pms_xml }, timeout: TIMEOUT)
-      Ox.load(response.body.gsub(/&(?!amp;)/, '&amp;'), mode: :hash_no_attrs, effort: :auto_define)
+      parsed_response = Ox.load(response.body.gsub(/&(?!amp;)/, '&amp;'), mode: :hash_no_attrs, effort: :auto_define)
+      extract_response_body(parsed_response)
     end
+
+    private
+
+    attr_reader :sc_account
 
     def safe_extend_params(params)
       respond_to?(:extend_params, true) ? extend_params(params) : params
@@ -25,10 +30,6 @@ module TemairazuClient
     def extract_response_body(response)
       response[response_root] || response[:Error]
     end
-
-    private
-
-    attr_reader :sc_account
 
     def prepare_params(params, root)
       login_info = {
