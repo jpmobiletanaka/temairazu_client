@@ -23,6 +23,7 @@ module TemairazuClient
             dates.map do |date|
               xml.RoomStockInfo do
                 xml.RoomTypeCode params[:room_type_code]
+                xml.RoomTypeId params[:room_type_id]
                 xml.Date date.to_s
                 xml.Detail true
               end
