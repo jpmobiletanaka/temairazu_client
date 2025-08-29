@@ -15,7 +15,7 @@ module TemairazuClient
       extended_params = safe_extend_params(params)
       pms_xml = prepare_params(extended_params, request_root)
       response = ::HTTParty.post(TEMAIRAZU_URL, body: { PMS_XML: pms_xml }, timeout: TIMEOUT)
-      parsed_response = Ox.load(response.body.gsub(/&(?!amp;)/, '&amp;'), mode: :hash_no_attrs, effort: :auto_define)
+      parsed_response = ::Ox.load(response.body.gsub(/&(?!amp;)/, '&amp;'), mode: :hash_no_attrs, effort: :auto_define)
       extract_response_body(parsed_response)
     end
 
